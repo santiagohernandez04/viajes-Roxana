@@ -1,0 +1,221 @@
+
+<html xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html">
+
+<nav class="navbar navbar-expand navbar-light   topbar mb-2 static-top shadow" style="background-color: #4b0081;">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+
+    <!-- Topbar Search -->
+    <form
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                   aria-label="Search" aria-describedby="basic-addon2"/>
+            <div class="input-group-append">
+                <button class="btn btn-light" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+
+        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+        <li class="nav-item dropdown no-arrow d-sm-none">
+            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                 aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small"
+                               placeholder="Search for..." aria-label="Search"
+                               aria-describedby="basic-addon2"/>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </li>
+
+        <!-- Nav Item - Alerts -->
+        <h:panelGroup rendered="${not beanLogin.admon}">
+
+        <h:form style="display: flex; align-items: center; border-color: white">
+            <p:outputPanel style="position: relative;">
+                <p:commandButton style="background-color: #4b0081; border: transparent" icon="pi pi-shopping-cart" type="button" onclick="PF('dlg5').show();"/>
+                <span class="badge badge-primary badge-counter" style="position: absolute; top: 5px; right: 5px; border-color: white; font-size: 9px;">${beanJlist.carritoCompras.size()}</span>
+            </p:outputPanel>
+        </h:form>
+
+            <p:dialog header="Detalle de las compras" widgetVar="dlg5" modal="true" height="400">
+
+                <p:dataTable style="width: 850px;" id="tablaClientes3" value="#{beanJlist.carritoCompras}"
+                             var="usuario" paginator="true" rows="5" paginatorPosition="bottom">
+                    <!-- Configuración de las columnas -->
+                    <p:column headerText="Plan turistico">
+                        <h:outputText value="#{usuario.nom_plan}"/>
+                    </p:column>
+                    <p:column headerText="Cantidad de personas">
+                        <h:outputText value="#{usuario.cantidadPersonas}"/>
+                    </p:column>
+                    <p:column headerText="Valor alimentacion">
+                        <h:outputText value="#{usuario.valor_alimentacion}"/>
+                    </p:column>
+                    <p:column headerText="Valor otro">
+                        <h:outputText value="#{usuario.valor_otro}"/>
+                    </p:column>
+                    <p:column headerText="Valor Plan">
+                        <h:outputText value="#{usuario.valor_plan}"/>
+                    </p:column>
+                    <p:column headerText="Subtotal">
+                        <h:outputText value="#{usuario.costocompra}"/>
+                    </p:column>
+
+
+                    <!-- Más columnas según tu modelo de datos -->
+
+                </p:dataTable>
+                <div style="display: flex; justify-content: space-between" >
+                    <p:outputLabel id="cedula" value="Cedula del cliente: ${beanJlist.cedula_Comprador}">
+                    </p:outputLabel>
+                    <h:messages style="color: red; list-style-type: none;" globalOnly="true" />
+                    <p:outputLabel value="Total: ${beanJlist.total_compra}"></p:outputLabel>
+                </div>
+                <div style="display: flex;align-items: end">
+                    <h:form>
+                        <h:commandButton action="${beanJlist.pagarCarrito()}"
+                                         style="  border-color: white; background-color: #7900ac"
+                                         styleClass="btn btn-facebook" value="Pagar" type="submit">
+                        </h:commandButton>
+
+                    </h:form>
+                </div>
+
+            </p:dialog>
+        </h:panelGroup>
+        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+             aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">
+                Alerts Center
+            </h6>
+            <a class="dropdown-item d-flex align-items-center" href="#">
+                <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                        <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                </div>
+            </a>
+            <a class="dropdown-item d-flex align-items-center" href="#">
+                <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                        <i class="fas fa-donate text-white"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                </div>
+            </a>
+            <a class="dropdown-item d-flex align-items-center" href="#">
+                <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                        <i class="fas fa-exclamation-triangle text-white"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: We've noticed unusually high spending for your account.
+                </div>
+            </a>
+            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+        </div>
+
+
+        <!-- Nav Item - Messages -->
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-envelope fa-fw"></i>
+                <!-- Counter - Messages -->
+                <span class="badge badge-primary badge-counter">7</span>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="messagesDropdown">
+                <h6 style="background-color:#4b0081" class="dropdown-header" >
+                    Centro de mensajes
+                </h6>
+
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                             alt="..."/>
+                        <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">Buenos dias #{beanLogin.username} ¿Como estas?</div>
+                        <div class="small text-gray-500">Eros · 2w</div>
+                    </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Leer mas mensajes</a>
+            </div>
+        </li>
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-white media">${beanLogin.rolusuario}</span>
+                <span class="mr-2 d-none d-lg-inline text-white media">${beanLogin.username}</span>
+
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="userDropdown" style="padding-bottom: 0">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Activity Log
+                </a>
+                <div class="dropdown-divider" style="margin-bottom: 0   "></div>
+                <h:form style="text-align: center; justify-content: center; justify-items: center;align-items: center">
+                    <p:commandButton styleClass=" drop-hover" style="border-color: white; background-color:transparent; color: dimgray;
+                    font-size: 14px; "
+                                     icon="pi pi-sign-out" type="submit" ajax="false"
+                                     value="Cerrar sesión" action="#{beanLogin.cerrarSesion()}">
+                    </p:commandButton>
+                </h:form>
+            </div>
+        </li>
+
+    </ul>
+
+</nav>
+<!-- End of Topbar -->
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <script>
+        PrimeFaces.locales['es'] = {
+            closeText: 'Cerrar',
+            prevText: 'Anterior',
+            nextText: 'Siguiente',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Sólo hora',
+            timeText: 'Tiempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            millisecondText: 'Milisegundo',
+            currentText: 'Fecha actual',
+            ampm: false,
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            allDayText: 'Todo el día',
+            today: 'Hoy',
+            clear: 'Claro'
+        };
+
+
+    </script>
+
+    <style>
+
+
+        custom-switch {
+            display: flex;
+            align-items: center;
+            color: #fff; /* Texto en blanco */
+        }
+
+        custom-switch-label {
+            margin-right: 10px;
+        }
+
+        label {
+            margin-bottom: 0;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+        <div class="container">
+            <h1>Registrar punto de visita</h1>
+            <h:form>
+            <div class="row">
+                <div class="col-md-4">
+                    <h:outputLabel for="nom_actividad1">Nombre de la actividad:</h:outputLabel>
+                    <h:inputText id="nom_actividad1" styleClass="form-control" value="#{beanJlist.nombre}" >
+                        <f:facet name="label">Nombre de la actividad:</f:facet>
+                    </h:inputText>
+
+                </div>
+                <div class="col-md-4">
+
+                    <h:outputLabel for="descripcion">Descripcion:</h:outputLabel>
+                    <h:inputText id="descripcion" styleClass="form-control" value="#{beanJlist.descrip}"  >
+                        <f:facet name="label">Descripcion:</f:facet>
+                    </h:inputText>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h:outputLabel value="Departamento" for="departamento"/>
+                    <h:selectOneMenu id="departamento" value="#{beanJlist.selectedDepartamentoId}">
+                        <f:selectItems value="#{beanJlist.departamentos}" var="departamento"
+                                       itemLabel="#{departamento.departamento}" itemValue="#{departamento.id}"/>
+                        <p:ajax listener="#{beanJlist.cargarCiudades}" update="ciudad"/>
+                    </h:selectOneMenu>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h:outputLabel value="Ciudad" for="ciudad"/><br/>
+                    <h:selectOneMenu id="ciudad" value="#{beanJlist.selectedCiudadId}" >
+                        <f:selectItems value="#{beanJlist.ciudades}" var="ciudad" itemLabel="#{ciudad.ciudades}"
+                                       itemValue="#{ciudad.idCiudad}"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="col-md-4">
+                    <h:outputLabel>Punto de visita activo</h:outputLabel> <br/>
+                    <p:selectBooleanButton onLabel="Yes" offLabel="No" value="#{beanJlist.estado}"
+                                           onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem"/>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <h:outputLabel> </h:outputLabel> <br/>
+                    <button style="border-color: white; background-color: #af69cd" class="btn btn-primary me-md-2 mr-2"
+                            type="button" onclick="PF('dlg3').hide();">
+                        Cancelar
+                    </button>
+
+                    <h:commandButton action="#{beanJlist.enviarValoresPuntovisitas()}"
+                                     style="  border-color: white; background-color: #7900ac"
+                                     styleClass="btn btn-facebook" value="Guardar" type="submit"> </h:commandButton>
+
+                </div>
+
+            </div>
+        </h:form>
+
+        </div>
+
+</h:body>
+</html>

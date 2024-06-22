@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <script>
+        PrimeFaces.locales['es'] = {
+            closeText: 'Cerrar',
+            prevText: 'Anterior',
+            nextText: 'Siguiente',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Sólo hora',
+            timeText: 'Tiempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            millisecondText: 'Milisegundo',
+            currentText: 'Fecha actual',
+            ampm: false,
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            allDayText: 'Todo el día',
+            today: 'Hoy',
+            clear: 'Claro'
+        };
+
+
+    </script>
+
+    <style>
+
+
+
+        custom-switch {
+            display: flex;
+            align-items: center;
+            color: #fff; /* Texto en blanco */
+        }
+
+
+
+        custom-switch-label {
+            margin-right: 10px;
+        }
+        label{
+            margin-bottom: 0;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <h:form id="editForm">
+        <div class="container">
+
+            <h1>Editar plan turistico</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <h:outputLabel for="titulo">Titulo:</h:outputLabel>
+                    <h:inputText id="titulo" styleClass="form-control" value="#{beanJlist.titulo}" required="true">
+                        <f:facet name="label">Cedula:</f:facet>
+                    </h:inputText>
+                </div>
+                <div class="col-md-4">
+                    <h:outputLabel for="descripcion">Descripcion:</h:outputLabel>
+                    <h:inputText id="descripcion" styleClass="form-control" value="#{beanJlist.descripcion}" required="true">
+                        <f:facet name="label">Descripcion:</f:facet>
+                    </h:inputText>
+                </div>
+                <div class="col-md-4">
+                    <p:outputLabel for="cant_dias" value="Cantidad de dias:"/> <br/>
+                    <p:inputNumber id="cant_dias" value="#{beanJlist.cant_dias}" minValue="1" decimalPlaces="0" />
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h:outputLabel for="url">Url imagen</h:outputLabel>
+                    <h:inputText id="url" styleClass="form-control" value="#{beanJlist.url}" required="true">
+                        <f:facet name="label">Url imagen</f:facet>
+                    </h:inputText>
+                </div>
+                <div class="col-md-4">
+                    <h:outputLabel>Incluye alimentacion</h:outputLabel> <br/>
+                    <p:selectBooleanButton onLabel="Yes" offLabel="No" value="#{beanJlist.alimentacion}"
+                                           onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem" />
+                </div>
+                <div class="col-md-4">
+                    <h:outputLabel>Plan activo</h:outputLabel> <br/>
+                    <p:selectBooleanButton onLabel="Yes" offLabel="No" value="#{beanJlist.plan_Activo}"
+                                           onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h:outputLabel>Puntos de visita</h:outputLabel><br/>
+
+                    <p:selectManyMenu value="#{beanJlist.mm}" immediate="true">
+                        <f:selectItems value="#{beanJlist.mj}" var="punto" itemLabel="#{punto.nom_actividad}" itemValue="#{punto.id_actividad}"  />
+                    </p:selectManyMenu>
+
+                </div>
+                <div class="col-md-9">
+                    <br/>
+                    <h:form id="myForm">
+                        <p:outputLabel>Tarifas del plan</p:outputLabel>
+
+
+                        <div class="row" id="rowAlto">
+                            <div class="col-md-2">
+
+                                <h:outputLabel>Alta</h:outputLabel> <br/>
+                                <p:selectBooleanButton onLabel="Yes" offLabel="No" value="#{beanJlist.tarAlta}"
+                                                       onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem" />
+
+                            </div>
+                            <div class="col-md-3">
+                                <p:outputLabel for="costoAlto" value="Costo"/>
+                                <p:inputNumber id="costoAlto" value="#{beanJlist.costoAlta}" symbol=" COL"
+                                               symbolPosition="s" decimalSeparator="," thousandSeparator="." />
+
+                            </div>
+                            <div class="col-md-3">
+                                <p:outputLabel for="FiAlto" value="Fecha inicio" />
+                                <p:datePicker id="FiAlto" value="#{beanJlist.inicioAlta}" monthNavigator="true" yearNavigator="true" showWeek="true" />
+
+                            </div>
+                            <div class="col-md-3">
+                                <p:outputLabel for="FfAlto" value="Fecha de fin" />
+                                <p:datePicker id="FfAlto" value="#{beanJlist.finAlta}" monthNavigator="true" yearNavigator="true" showWeek="true" />
+                            </div>
+
+
+                        </div>
+                        <div class="row" id="rowMedio">
+                            <div class="col-md-2">
+
+                                <h:outputLabel>Media</h:outputLabel> <br/>
+                                <p:selectBooleanButton onLabel="Yes" offLabel="No" value="#{beanJlist.tarMedia}"
+                                                       onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem" />
+
+                            </div>
+                            <div class="col-md-3">
+                                <p:outputLabel for="costoMedio" value="Costo"/>
+                                <p:inputNumber id="costoMedio" value="#{beanJlist.costoMedia}" symbol=" COL"
+                                               symbolPosition="s" decimalSeparator="," thousandSeparator="." />
+
+                            </div>
+                            <div class="col-md-3">
+                                <p:outputLabel for="FiMedio" value="Fecha inicio" />
+                                <p:datePicker id="FiMedio" value="#{beanJlist.inicioMedia}" monthNavigator="true" yearNavigator="true" showWeek="true" />
+
+                            </div>
+                            <div class="col-md-3">
+                                <p:outputLabel for="FfMedio" value="Fecha de fin" />
+                                <p:datePicker id="FfMedio" value="#{beanJlist.finMedia}" monthNavigator="true" yearNavigator="true" showWeek="true" />
+                            </div>
+
+
+                        </div>
+                        <div class="row" id="rowBajo">
+                            <div class="col-md-2">
+
+                                <h:outputLabel>Baja</h:outputLabel> <br/>
+                                <p:selectBooleanButton onLabel="Yes" offLabel="No" value="#{beanJlist.tarBaja}"
+                                                       onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem" />
+
+                            </div>
+                            <div class="col-md-3">
+                                <p:outputLabel for="costoBajo" value="Costo"/>
+                                <p:inputNumber id="costoBajo" value="#{beanJlist.costoBaja}" symbol=" COL"
+                                               symbolPosition="s" decimalSeparator="," thousandSeparator="." />
+
+                            </div>
+                            <div class="col-md-3">
+                                <p:outputLabel for="FiBajo" value="Fecha inicio" />
+                                <p:datePicker id="FiBajo" value="#{beanJlist.inicioBaja}" monthNavigator="true" yearNavigator="true" showWeek="true" />
+
+                            </div>
+                            <div class="col-md-3">
+                                <p:outputLabel for="FfBajo" value="Fecha de fin" />
+                                <p:datePicker id="FfBajo" value="#{beanJlist.finBaja}" monthNavigator="true" yearNavigator="true" showWeek="true" />
+                            </div>
+
+
+                        </div>
+                    </h:form>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <h:outputLabel> </h:outputLabel> <br/>
+                    <button style="border-color: white; background-color: #af69cd" class="btn btn-primary me-md-2 mr-2"
+                            type="button" onclick="PF('dlg4').hide();">
+                        Cancelar
+                    </button>
+
+                    <h:commandButton action="${beanJlist.editar_plan()}"
+                                     style="  border-color: white; background-color: #7900ac"
+                                     styleClass="btn btn-facebook" value="Guardar" type="submit"> </h:commandButton>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Compras.xhtml" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Tarifa.xhtml" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/index.html.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/bootstrap/index.html" value="file://$PROJECT_DIR$/src/main/webapp/bootstrap" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.xhtml" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/k.xhtml" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/layoud/Topnav.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/layoud" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/layoud/header.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/layoud" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/layout/content.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/layout" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/login.xhtml" value="file://$PROJECT_DIR$/src/main/webapp" />
+      </map>
+    </option>
+  </component>
+</project>

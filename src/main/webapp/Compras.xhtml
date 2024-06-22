@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:panelGroup rendered="${beanLogin.admon}">
+<h:head>
+    <title>Viajes Roxana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet"/>
+    <link href="bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="resources/js/sb-admin-2.min.js"></script>
+    <script src="resources/jsb/bootstrap.bundle.min.js"></script>
+    <script>
+        function realizarAccionesYMostrarDialog() {
+        }
+
+        function mostrarDialogo() {
+            PF('dlg3').show();
+        }
+
+        function mostrarDialogo1() {
+            PF('dlg4').show();
+        }
+    </script>
+</h:head>
+<div id="wrapper">
+    <ui:include src="layout/aside.xhtml"></ui:include>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <ui:include src="layout/nav.xhtml"></ui:include>
+        <div class="container" style="margin-top: 0px">
+            <h2 class="mr-0 d-none d-lg-inline text-black-50 ">Compras</h2>
+
+            <div class="d-flex mb-4">
+                <h:form style="display: flex; align-items: center">
+                    <p:commandButton style="border-color: white; background-color:#af69cd" icon="pi pi-refresh"
+                                     type="submit" action="${beanLista.Compras()}"
+                                     value="Refrescar" process="@form" update="tablaClientes1">
+                    </p:commandButton>
+
+                </h:form>
+                <h:panelGrid columns="1" cellpadding="5">
+                    <p:commandButton value="Detalle compra" type="button" onclick="PF('dlg2').show();"/>
+                </h:panelGrid>
+                <p:dialog header="Detalle de las compras" widgetVar="dlg2" modal="true" height="400">
+                    <div class="input-group rounded" style="flex: 1; text-align: end; justify-content: end">
+                        <h:outputLabel
+                                style="margin: 0; text-align: center;justify-content: center;padding: 12px 12px 12px 12px">Busqueda por id compra</h:outputLabel>
+                        <h:form style="display: flex; align-items: center">
+                            <h:inputText value="#{beanSearch.id_compra}" styleClass="form-control rounded"
+                                         placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+                            <p:commandButton value="Consultar" actionListener="#{beanSearch.search_detalleCompra()}"
+                                             process="@form" update="tablaClientes"/>
+                        </h:form>
+                    </div>
+                    <p:dataTable style="width: 850px;" id="tablaClientes" value="#{beanSearch.detalleList}"
+                                 var="usuario">
+                        <!-- Configuración de las columnas -->
+                        <p:column headerText="id detalle">
+                            <h:outputText value="#{usuario.id_detallecompra}"/>
+                        </p:column>
+                        <p:column headerText="Nombre plan">
+                            <h:outputText value="#{usuario.nombre_plan}"/>
+                        </p:column>
+                        <p:column headerText="Cant personas">
+                            <h:outputText value="#{usuario.cant_personas}"/>
+                        </p:column>
+                        <p:column headerText="Valor alimentacion">
+                            <h:outputText value="#{usuario.valor_alimentacionplan}">
+                                <f:convertNumber pattern="$#,##0" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Valor plan">
+                            <h:outputText value="#{usuario.valor_plan}">
+                                <f:convertNumber pattern="$#,##0" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Valor total">
+                            <h:outputText value="#{usuario.total_detalle}">
+                                <f:convertNumber pattern="$#,##0" />
+                            </h:outputText>
+                        </p:column>
+                        <!-- Más columnas según tu modelo de datos -->
+                    </p:dataTable>
+                </p:dialog>
+                <div class="input-group rounded" style="flex: 1; text-align: end; justify-content: end">
+                    <h:outputLabel
+                            style="margin: 0; text-align: center;justify-content: center;padding: 12px 12px 12px 12px">Busqueda por id compra</h:outputLabel>
+                    <h:form style="display: flex; align-items: center">
+                        <h:inputText value="#{beanLista.lista}" styleClass="form-control rounded"
+                                     placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+                        <p:commandButton style="height: 36px"  type="submit" icon="pi pi-search" action="#{beanLista.Compras()}" process="@form" update="tablaClientes1"/>
+                    </h:form>
+                </div>
+            </div>
+            <p:dataTable id="tablaClientes1" value="#{beanLista.compra}"
+                         var="compra" paginator="true" rows="6" paginatorPosition="bottom" >
+                <p:column headerText="Id compra">
+                    <h:outputText value="#{compra.id_compra}"/>
+                </p:column>
+                <p:column headerText="Id vendedor">
+                    <h:outputText value="#{compra.id_vendedor}"/>
+                </p:column>
+                <p:column headerText="Id cliente">
+                    <h:outputText value="#{compra.id_cliente}"/>
+                </p:column>
+                <p:column headerText="Fecha creacion">
+                    <h:outputText value="#{compra.fech_creacion}"/>
+                </p:column>
+                <p:column headerText="Total otros cargos">
+                    <h:outputText value="#{compra.total_otros_cargos}">
+                        <f:convertNumber pattern="$#,##0" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Total">
+                    <h:outputText value="#{compra.total}">
+                        <f:convertNumber pattern="$#,##0" />
+                    </h:outputText>
+                </p:column>
+                <!-- Más columnas según tu modelo de datos -->
+            </p:dataTable>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button style="border-color: white; background-color:#af69cd " class="btn btn-primary me-md-2 mr-2"
+                        type="button">Anterior
+                </button>
+                <button style="border-color: white; background-color:#7900ac " class="btn btn-facebook"
+                        type="button">Siguiente
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</h:panelGroup>
+</html>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:panelGroup rendered="${not beanLogin.admon}">
+<h:head>
+    <title>Viajes Roxana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet"/>
+    <link href="bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
+    <script>
+        PrimeFaces.locales['es'] = {
+            closeText: 'Cerrar',
+            prevText: 'Anterior',
+            nextText: 'Siguiente',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Sólo hora',
+            timeText: 'Tiempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            millisecondText: 'Milisegundo',
+            currentText: 'Fecha actual',
+            ampm: false,
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            allDayText: 'Todo el día',
+            today: 'Hoy',
+            clear: 'Claro'
+        };
+
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
+            integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="resources/js/sb-admin-2.min.js"></script>
+    <script src="resources/jsb/bootstrap.bundle.min.js"></script>
+    <h:outputStylesheet>
+
+        .product-item .product-item-content {
+            border: 1px solid var(--surface-d);
+            border-radius: 3px;
+            margin: .3rem;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .product-item .product-image {
+            width: 80%;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+        }
+        custom-switch {
+            display: flex;
+            align-items: center;
+            color: #fff; /* Texto en blanco */
+        }
+
+        custom-switch-label {
+            margin-right: 10px;
+        }
+
+        label {
+            margin-bottom: 0;
+        }
+
+        .Activo {
+            background: #c8e6c9;
+            color: #256029;
+            border-radius: 2px;
+            padding: 0.25em 0.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: .3px;
+        }
+
+        .Inactivo {
+            background: #ffcdd2;
+            color: #c63737;
+            border-radius: 2px;
+            padding: 0.25em 0.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: .3px;
+        }
+
+        .status-lowstock {
+            background-color: yellow;
+            color: black;
+        }
+
+
+    </h:outputStylesheet>
+
+</h:head>
+<div id="wrapper">
+    <ui:include src="layout/aside.xhtml"></ui:include>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <ui:include src="layout/nav.xhtml"></ui:include>
+        <div class="container" style="margin-top: 0px">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="mr-0 d-none d-lg-inline text-black-50">Venta cliente ${beanJlist.nombre}</h2>
+                <p:commandButton style="margin: 10px" value="Seleccionar cliente" type="button" onclick="PF('dlg6').show();" styleClass="ui-button-help"/>
+            </div>
+
+            <p:dialog header="Seleccionar cliente" widgetVar="dlg6" modal="true" height="400" width="950" >
+                <div class="input-group rounded" style="flex: 1; text-align: end; justify-content: end">
+                    <h:outputLabel
+                            style="margin: 0; text-align: center;justify-content: center;padding: 12px 12px 12px 12px">Busqueda por cédula del cliente</h:outputLabel>
+                    <h:form style="display: flex; align-items: center">
+                        <h:inputText value="#{beanLista.lista}" styleClass="form-control rounded"
+                                     placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+                        <p:commandButton value="Consultar" actionListener="#{beanLista.Cliente()}"
+                                         process="@form" update="Clientes"/>
+                    </h:form>
+                </div>
+                <p:dataTable style="width: 850px;" id="Clientes" value="#{beanLista.cliente}"
+                             var="cliente">
+                    <!-- Configuración de las columnas -->
+                    <p:column headerText="Seleccionar">
+                        <h:form>
+                            <p:commandButton value="Seleccionar" type="submit" ajax="false" action="${beanJlist.setcedula(cliente.cedula,cliente.nombre)}">
+                            </p:commandButton>
+                        </h:form>
+                    </p:column>
+                    <p:column headerText="Cedula">
+                        <h:outputText value="#{cliente.cedula}"/>
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{cliente.nombre}"/>
+                    </p:column>
+                    <p:column headerText="Telefono 1">
+                        <h:outputText value="#{cliente.telefono_1}"/>
+                    </p:column>
+                    <p:column headerText="Fecha nacimiento">
+                        <h:outputText value="#{cliente.fech_nacimiento}"/>
+                    </p:column>
+                    <p:column headerText="Correo">
+                        <h:outputText value="#{cliente.correo}"/>
+                    </p:column>
+
+                    <!-- Más columnas según tu modelo de datos -->
+                </p:dataTable>
+            </p:dialog>
+
+            <div class="card">
+                <div class="card">
+                    <p:carousel value="#{carouselView.planTuristicos}" var="plan" circular="true"
+                                responsiveOptions="#{carouselView.responsiveOptions}" numVisible="3" numScroll="1">
+
+                        <div class="product-item">
+                            <div class="product-item-content">
+                                <div class="mb-3">
+                                    <p:graphicImage url="#{plan.url}" styleClass="product-image"/>
+                                </div>
+                                <div>
+                                    <h4 class="mb-1">#{plan.titulo}</h4>
+                                    <p>#{plan.descripcion}</p>
+                                    <span class="product-badge #{carouselView.getStatusStyle(plan)}">#{plan.estado ? 'Activo' : 'Inactivo'}</span>
+
+                                    <h:form style="margin-top: 15px">
+                                        <p:commandButton type="button" value="Vender" styleClass="ui-button-help"
+                                                         onclick="PF('dlg3').show();">
+                                            <p:ajax listener="${beanJlist.ee(plan.id_planturistico)}"></p:ajax>
+                                            <p:ajax listener="#{beanJlist.actualizarTemporadas}" />
+                                            <p:ajax listener="#{beanJlist.actualizarPuntosVisita}" />
+                                            <f:ajax render="pdialog"></f:ajax>
+                                        </p:commandButton>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </p:carousel>
+                </div>
+                <p:dialog widgetVar="dlg3" modal="true" height="400" width="850">
+                    <h:form id="pdialog">
+                        <div class="container">
+                            <h1>Registrar compra</h1>
+
+                            <div class="row">
+                                <div class="col-md-6" >
+                                    <br/>
+                                    <p:dataTable id="puntosVisita" value="#{beanJlist.nombresPuntosVisita}" var="punto">
+                                        <p:column headerText="Actividades del plan turistico">
+                                            <h:outputText value="${punto.toString()}"></h:outputText>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                                <div class="col-md-6">
+                                    <h:outputLabel>Plan seleccionado</h:outputLabel><br/>
+                                    <p:selectOneMenu  disabled="true" value="#{beanJlist.selectedPlanTuristicoId}"  >
+                                        <f:selectItems value="#{beanJlist.planesTuristicos}" var="plan"
+                                                       itemLabel="#{plan.titulo}" itemValue="#{plan.id_planturistico}"/>
+                                    </p:selectOneMenu>
+                                    <div >
+                                        <br/>
+                                        <p:selectOneMenu id="temporada" value="#{beanJlist.selectedTemporadaId}">
+                                            <f:selectItems value="#{beanJlist.temporadas}" var="temporada"
+                                                           itemLabel="Temporada: #{temporada.id_temporada} - Costo temporada: $#{temporada.costo}"
+                                                           itemValue="#{temporada.id_temporada}" />
+                                        </p:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <p:outputLabel for="input2" value="Valor otro"/>
+                                    <p:inputNumber id="input2" value="#{beanJlist.valor_otro}" symbol=" COL"
+                                                   symbolPosition="s" decimalSeparator="," thousandSeparator="."/>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <h:outputLabel>¿Desea incluir alimentación?</h:outputLabel> <br/>
+                                    <p:selectBooleanButton onLabel="Yes" offLabel="No" value="#{beanJlist.alimentacion}"
+                                                           onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem" />
+
+                                </div>
+                                <div class="col-md-4">
+                                    <p:outputLabel for="input4" value="Cantidad de personas"/>
+                                    <p:inputNumber id="input4" value="#{beanJlist.cantidadPersonas}"  minValue="1" decimalPlaces="0"/>
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <h:outputLabel> </h:outputLabel> <br/>
+                                    <button style="border-color: white; background-color: #af69cd" class="btn btn-primary me-md-2 mr-2"
+                                            type="button" onclick="PF('dlg3').hide();">
+                                        Cancelar
+                                    </button>
+                                    <h:commandButton action="${beanJlist.enviarValoresCompra()}"
+                                                     style="  border-color: white; background-color: #7900ac"
+                                                     styleClass="btn btn-facebook" value="Guardar" type="submit"> </h:commandButton>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="row">
+
+
+                        </div>
+                    </h:form>
+                </p:dialog>
+            </div>
+        </div>
+    </div>
+</div>
+</h:panelGroup>
+</html>

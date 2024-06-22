@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <script>
+        PrimeFaces.locales['es'] = {
+            closeText: 'Cerrar',
+            prevText: 'Anterior',
+            nextText: 'Siguiente',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Sólo hora',
+            timeText: 'Tiempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            millisecondText: 'Milisegundo',
+            currentText: 'Fecha actual',
+            ampm: false,
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            allDayText: 'Todo el día',
+            today: 'Hoy',
+            clear: 'Claro'
+        };
+
+
+    </script>
+
+    <style>
+
+
+        custom-switch {
+            display: flex;
+            align-items: center;
+            color: #fff; /* Texto en blanco */
+        }
+
+        custom-switch-label {
+            margin-right: 10px;
+        }
+
+        label {
+            margin-bottom: 0;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+    <div class="container">
+            <h1>Modificar Vendedor</h1>
+        <h:form id="formModificarVendedor">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h:outputLabel for="cedula">Cédula:</h:outputLabel>
+                        <h:inputText id="cedula" styleClass="form-control" disabled="true" value="#{beanInsert_Update.cedula}">
+                            <f:facet name="label">Cédula:</f:facet>
+                        </h:inputText>
+                    </div>
+                    <div class="col-md-4">
+                        <h:outputLabel for="nombre">Nombre:</h:outputLabel>
+                        <h:inputText id="nombre" styleClass="form-control" value="#{beanInsert_Update.nombre}" required="true">
+                            <f:facet name="label">Nombre:</f:facet>
+                        </h:inputText>
+                    </div>
+                    <div class="col-md-4">
+                        <h:outputLabel for="correo">Correo electrónico:</h:outputLabel>
+                        <h:inputText id="correo" styleClass="form-control" value="#{beanInsert_Update.correo}" required="true">
+                            <f:facet name="label">Correo electrónico:</f:facet>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <p:outputLabel for="telefono_1" value="Telefono 1"/>
+                        <p:inputText id="telefono_1" value="#{beanInsert_Update.telefono_1}"/>
+                    </div>
+                    <div class="col-md-4">
+                        <p:outputLabel for="telefono_2" value="Telefono 2"/>
+                        <p:inputText id="telefono_2" value="#{beanInsert_Update.telefono_2}"/>
+                    </div>
+                    <div class="col-md-4">
+                        <p:outputLabel for="navigator" value="Fecha de nacimiento"/>
+                        <p:datePicker id="navigator" value="#{beanInsert_Update.fecha_nacimiento}" monthNavigator="true" yearNavigator="true" showWeek="true"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h:outputLabel for="usuario">Usuario:</h:outputLabel>
+                        <h:inputText id="usuario" styleClass="form-control" value="#{beanInsert_Update.username}" required="true">
+                            <f:facet name="label">Usuario:</f:facet>
+                        </h:inputText>
+                    </div>
+                    <div class="col-md-4">
+                        <h:outputLabel for="password">Contraseña:</h:outputLabel>
+                        <h:inputText id="password" styleClass="form-control" value="#{beanInsert_Update.password}" required="true">
+                            <f:facet name="label">Contraseña:</f:facet>
+                        </h:inputText>
+                    </div>
+                    <div class="col-md-4">
+                        <h:outputLabel>Vendedor activo</h:outputLabel> <br/>
+                        <p:selectBooleanButton onLabel="Yes" offLabel="No" value="#{beanInsert_Update.activo}" onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem"/>
+                    </div>
+                    <div class="col-md-4">
+                        <h:outputLabel> </h:outputLabel> <br/>
+                        <button style="border-color: white; background-color: #af69cd" class="btn btn-primary me-md-2 mr-2" type="button" onclick="PF('dlg4').hide();">
+                            Cancelar
+                        </button>
+                        <h:commandButton action="#{beanInsert_Update.Insert_Update_vendedor()}" style="  border-color: white; background-color: #7900ac" styleClass="btn btn-facebook" value="Guardar" type="submit"> </h:commandButton>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </div>
+    <div class="row">
+    </div>
+</h:body>
+</html>

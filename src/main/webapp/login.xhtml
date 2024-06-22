@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Login</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet"/>
+
+    <link href="bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
+    <style> .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #fccb90;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #4b1c71, #56008c, #620096, #ffffff);
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #35007c, #640ba7, #7e33b7, #a167c9);
+    }
+
+
+    @media (min-width: 768px) {
+        .gradient-form {
+            height: 100vh !important;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .gradient-custom-2 {
+            border-top-right-radius: .3rem;
+            border-bottom-right-radius: .3rem;
+        }
+    }
+    body{
+        background-image: url('https://www.taranna.com/docs/viaje-a-colombia-medida-taranna-001.jpg'); /* Reemplaza con la ruta de tu imagen de fondo */
+        background-size: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100%;
+        margin: 0;
+        font-family: 'Nunito', sans-serif;
+        position: relative;
+    }
+
+    h\:selectOneMenu:hover {
+        background-color: #FFB6C1;
+    }
+    </style>
+</h:head>
+
+<body class="h-75 gradient-form"  >
+
+<div  class=" container py-4 h-75" >
+    <div class="row d-flex justify-content-center align-items-center h-75" >
+        <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+                <div class="row g-0">
+                    <div class="col-lg-6" >
+                        <div class="card-body p-md-5 mx-md-4" style="">
+                            <div class="text-center">
+                                <h:graphicImage
+                                        url="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                                        style="width: 185px;"></h:graphicImage>
+                                <h4 class="mt-1 mb-5 pb-1">#{msgs['loginForm.Tittle']}</h4>
+                            </div>
+                            <p>#{msgs['loginForm.porfavorcuenta']}</p>
+                            <h:form styleClass="user">
+
+
+                                <div class="form-outline mb-4">
+                                    <h:outputLabel value="#{msgs['loginForm.enterUsername']}"/>
+                                    <h:inputText styleClass="form-control form-control-user"
+                                                 value="${beanLogin.username}" required="true"/>
+                                </div>
+
+
+                                <div class="form-outline mb-4">
+                                    <h:outputLabel value="#{msgs['loginForm.enterPassword']}"/>
+                                    <h:inputSecret styleClass="form-control form-control-user"
+                                                   value="#{beanLogin.password}" required="true"/>
+
+                                </div>
+                                <h:messages style="list-style: none; padding: 0; text-align: center; color: red"/>
+
+
+                                <div class="text-center pt-1 mb-5 pb-1" style="word-wrap: break-word; white-space: pre-line;">
+
+                                    <h:commandButton styleClass="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                     value="#{msgs['loginForm.iniciarsession']}"
+                                                     action="#{beanLogin.login()}"/>
+                                    <p:outputLabel style="margin: 10px; text-decoration: underline;cursor: pointer" value="#{msgs['loginForm.terminos']}
+                                        "  onclick="PF('dlg6').show();" />
+
+                                    <p:dialog header="#{msgs['loginForm.modalTitle']}" widgetVar="dlg6" modal="true" height="400" width="700" style="text-align: justify">
+
+
+                                        Política de Privacidad:
+
+                                        Bienvenido a Viajes Roxana. Nos comprometemos a proteger la privacidad de nuestros usuarios y clientes. Esta política de privacidad explica cómo recopilamos, almacenamos, utilizamos y protegemos la información personal que nos proporciona al utilizar nuestros servicios. Al acceder y utilizar nuestros servicios, acepta las prácticas descritas en esta política.
+
+                                        1. Recolección de Datos:
+
+                                        Para ofrecerle una experiencia personalizada, podemos recopilar información personal como nombre, dirección, correo electrónico y detalles de viaje. Obtendremos su consentimiento antes de recopilar cualquier dato personal, cumpliendo con las regulaciones colombianas.
+
+                                        2. Almacenamiento y Seguridad de Datos:
+
+                                        La Ley 1581 establece pautas para el almacenamiento y la seguridad de datos. Implementamos medidas de seguridad como cifrado y políticas de acceso restringido para proteger su información.
+
+                                        3. Derechos de los Usuarios:
+
+                                        De conformidad con las regulaciones colombianas, usted tiene el derecho de acceder, corregir y solicitar la eliminación de sus datos personales. Nuestra plataforma facilita el ejercicio de estos derechos a través de un proceso claro y accesible.
+
+                                        Términos y Condiciones:
+
+                                        Al utilizar los servicios de Viajes Roxana, acepta los siguientes términos y condiciones:
+
+                                        1. Uso Aceptable:
+
+                                        El usuario se compromete a utilizar nuestros servicios de manera legal y ética. Cualquier uso indebido puede dar lugar a la terminación de la cuenta y acciones legales.
+
+                                        2. Responsabilidades del Usuario:
+
+                                        Los usuarios son responsables de la exactitud de la información proporcionada. Viajes Roxana no se hace responsable de información incorrecta.
+
+                                        3. Reservas y Pagos:
+
+                                        Las reservas están sujetas a disponibilidad y políticas de cancelación. Los pagos deben realizarse de acuerdo con las condiciones establecidas en la plataforma.
+
+                                        4. Modificaciones y Actualizaciones:
+
+                                        Nos reservamos el derecho de modificar esta política de privacidad y los términos y condiciones en cualquier momento. Se le notificará sobre cambios significativos.
+
+                                        Al utilizar nuestros servicios, usted acepta estas políticas y condiciones. En Viajes Roxana, nos esforzamos por brindarle una experiencia de viaje segura, legal y memorable. ¡Gracias por elegirnos!
+                                    </p:dialog>
+                                </div>
+
+
+
+                            </h:form>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex flex-column align-items-end gradient-custom-2">
+                        <h:form style="margin-top: 10px;">
+                            <h:selectOneMenu value="#{Lenguaje.localeCode}" onchange="submit()"
+                                             valueChangeListener="#{Lenguaje.changeLocale}" styleClass="form-select"
+                                             style="border: none; padding: 5px; width: 110px; font-size: 14px; box-shadow: 0 8px 9px -4px rgba(0,0,0,0.15), 0 4px 18px 0 rgba(0,0,0,0.1); border-radius: 0.25rem; margin: 10px; background-color: white; border: 2px solid #9442ee;">
+                                <f:selectItem itemValue="es" itemLabel="Español"/>
+                                <f:selectItem itemValue="en" itemLabel="English"/>
+                            </h:selectOneMenu>
+                        </h:form>
+
+                        <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                            <h4 class="mb-4"> #{msgs['loginForm.quienessomos']}</h4>
+                            <p class="media">
+                                #{msgs['loginForm.texto']} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
